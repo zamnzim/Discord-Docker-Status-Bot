@@ -11,6 +11,7 @@ jobs:
       - name: Build and push the Image
         run: |
           docker login --username zamnzim --password ${{ secrets.GH_TOKEN}} ghcr.io
-
           docker build . --tag ghcr.io/zamnzim/discord-docker-status-bot:latest
+          docker push ghcr.io/zamnzim/discord-docker-status-bot:latest
+
 
