@@ -12,4 +12,5 @@ jobs:
         run: |
           docker login --username zamnzim --password ${{ secrets.GH_TOKEN}} ghcr.io
 
-          docker build . --tag ghcr.io/zamnzim/Discord-Docker-Status-Bot:latest
+          docker build . --tag ghcr.io/zamnzim/discord-docker-status-bot:latest
+
