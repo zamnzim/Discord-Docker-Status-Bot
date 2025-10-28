@@ -1,0 +1,11 @@
+services:
+  discord-status-bot:
+    image: ghcr.io/zamnzim/discord-docker-status-bot:latest
+    container_name: discord-docker-status-bot
+    restart: unless-stopped
+    environment:
+      - DISCORD_TOKEN={PLACE BOT TOKEN HERE}
+      - DISCORD_CHANNEL_ID={PLACE CHANNEL ID HERE}
+      - DOCKER_SERVER_NAME={NAME OF YOUR SERVER}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
