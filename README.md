@@ -7,7 +7,7 @@ This bot is also for running on multiple servers as the bot will identify the di
 
 ![Example Running](https://github.com/user-attachments/assets/74962c43-742a-4fbb-a9d1-6804a5420c42)
 
-#Environment Variables
+# Environment Variables
 DISCORD_TOKEN - The bot token from discord.
 
 DISCORD_CHANNEL_ID - The channel ID of the chat you would like the bot to write status updates in.
