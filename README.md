@@ -12,7 +12,7 @@ DISCORD_TOKEN - The bot token from discord.
 
 DISCORD_CHANNEL_ID - The channel ID of the chat you would like the bot to write status updates in.
 
-DOCKER_SERVER_NAME - The name of the server you are running the container on. Naming is used to seperate the status message from your other servers status messages.
+DOCKER_SERVER_NAME - The name of the server you are running the container on. Server name is used to seperate the status messages from one server to the other so you can have multiple servers using the same bot to send messages to the same channel. Defaults to "Docker".
 
 # Docker Run
 ```
