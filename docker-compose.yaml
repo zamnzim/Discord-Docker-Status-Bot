@@ -4,9 +4,8 @@ services:
     container_name: discord-docker-status-bot
     restart: unless-stopped
     environment:
-      - DISCORD_TOKEN={PLACE BOT TOKEN HERE}
-      - DISCORD_CHANNEL_ID={PLACE CHANNEL ID HERE}
-      - DOCKER_SERVER_NAME={NAME OF YOUR SERVER}
+      - DISCORD_TOKEN=your_discord_bot_token_here
+      - DISCORD_CHANNEL_ID=your_channel_id_here
+      - DOCKER_SERVER_NAME=your_server_name_her
     volumes:
-
       - /var/run/docker.sock:/var/run/docker.sock:ro
