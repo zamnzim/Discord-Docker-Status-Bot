@@ -1,18 +1,19 @@
 # Discord-Docker-Status-Bot
-Simple discord bot written in python.
+A lightweight Python-based Discord bot that monitors Docker containers and posts their status to a pinned message in a specified Discord channel.Simple discord bot written in python.
 
-The bot will pull the status of containers and pin the status to a chosen chat. Every 10s the docker containers are checked for changes. If any changes occur to the containers, the pinned message is edited and replaced with the current status.
+Every 10 seconds, the bot checks the status of all containers. If any changes are detected, it updates the pinned message with the current status.
 
-This bot is also for running on multiple servers as the bot will identify the difference in pinned messages in chat. The bot will only update the status messages of the server it is running on.
+This bot is designed for multi-server deployments. Each instance identifies its own pinned message using a unique server name (```DOCKER_SERVER_NAME```) and updates only the message associated with the server it’s running on. This allows multiple servers to report to the same Discord channel without interference.
 
 ![Example Running](https://github.com/user-attachments/assets/74962c43-742a-4fbb-a9d1-6804a5420c42)
 
 # Environment Variables
-DISCORD_TOKEN - The bot token from discord.
 
-DISCORD_CHANNEL_ID - The channel ID of the chat you would like the bot to write status updates in.
-
-DOCKER_SERVER_NAME - The name of the server you are running the container on. Server name is used to seperate the status messages from one server to the other so you can have multiple servers using the same bot to send messages to the same channel. Defaults to "Docker".
+| Variable | Dscription |
+| -------- | ---------- |
+| DISCORD_TOKEN | Your Discord bot token. |
+| DISCORD_CHANNEL_ID | The ID of the Discord channel where the bot will post status updates in. |
+| DOCKER_SERVER_NAME | A unique name for the server. Used to distinguish pinned messages per host. Defaults to ```"Docker"```. |
 
 # Docker Run
 ```
