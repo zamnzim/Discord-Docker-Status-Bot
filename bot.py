@@ -24,8 +24,8 @@ def get_status_embed():
     )
 
     name_width = 26
-    status_width = 12
-    details_pad = 8
+    status_width = 10
+    details_pad = 10
 
     header = f"{'Name':<{name_width}} {'Status':>{status_width}} {'Details':<{details_pad}}"
     divider = "-" * len(header)
