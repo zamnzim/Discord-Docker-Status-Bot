@@ -23,12 +23,16 @@ def get_status_embed():
         title=f"{server_name} Docker Container Status"
     )
 
-    # Table headers with fixed column widths
-    header = f"{'Name':<20} {'Status':<10} Details"
-    lines = [header, "-" * 55]
+    # Column widths
+    name_width = 26
+    status_width = 10
+    details_offset = 8 
+
+    header = f"{'Name':<{name_width}} {'Status':>{status_width}} {'Details':>{details_offset}}"
+    lines = [header, "-" * (name_width + status_width + details_offset)]
 
     for container in docker_client.containers.list(all=True):
-        name = container.name[:20]  # Truncate long names
+        name = container.name[:name_width - 2]
         status = "Running" if container.status == "running" else "Stopped"
         details = ""
 
@@ -45,18 +49,16 @@ def get_status_embed():
                 details += f" — {oom}"
 
         emoji = "🟢" if container.status == "running" else "🔴"
-        line = f"{emoji} {name:<20} {status:<10} {details}"
+        line = f"{emoji} {name:<{name_width - 2}} {status:>{status_width}} {details}"
         lines.append(line)
 
-    # Add the formatted table as a single code block
     embed.add_field(
-        name="Container Overview",
+        name="",
         value="```" + "\n".join(lines) + "```",
         inline=False
     )
 
     return embed
-
 
 # Triggered when the bot successfully connects to Discord
 @client.event
