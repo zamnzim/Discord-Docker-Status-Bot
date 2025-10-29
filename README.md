@@ -1,5 +1,5 @@
 # Discord-Docker-Status-Bot
-A lightweight Python-based Discord bot that monitors Docker containers and posts their status to a pinned message in a specified Discord channel.
+A lightweight Python based Discord bot that monitors Docker containers and posts their status to a pinned message in a specified Discord channel.
 
 Every 10 seconds, the bot checks the status of all containers. If any changes are detected, it updates the pinned message with the current status.
 
