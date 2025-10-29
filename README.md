@@ -5,7 +5,7 @@ Every 10 seconds, the bot checks the status of all containers. If any changes ar
 
 This bot is designed for multi-server deployments. Each instance identifies its own pinned message using a unique server name (```DOCKER_SERVER_NAME```) and updates only the message associated with the server it’s running on. This allows multiple servers to report to the same Discord channel without interference.
 
-![Example Running](https://github.com/user-attachments/assets/ad75ebea-beca-431a-b54d-ecbf6e5edd43)
+![Example Running](https://github.com/user-attachments/assets/048d22fd-ecf6-4afa-b088-2dfbded9d404)
 
 # Environment Variables
 
