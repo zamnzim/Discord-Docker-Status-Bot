@@ -17,24 +17,17 @@ intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 docker_client = docker.from_env()
 
-# Generate a formatted status message for all containers
 def get_status_text():
     lines = [f"📦 **{server_name} Docker Container Status**\n"]
-
-    # Iterate through all containers (running and stopped)
     for container in docker_client.containers.list(all=True):
-        # Choose emoji based on container status
         emoji = "🟢" if container.status == "running" else "🔴"
         status = "**Running**" if container.status == "running" else "**Stopped**"
 
-        # If container is stopped, append diagnostic info
         if container.status != "running":
             state = container.attrs.get("State", {})
             exit_code = state.get("ExitCode", "N/A")
             error = state.get("Error", "")
             oom = "OOMKilled" if state.get("OOMKilled") else ""
-
-            # Build reason string with exit code, error, and OOM status
             reason = f"(Exit {exit_code})"
             if error:
                 reason += f" — {error}"
@@ -42,17 +35,12 @@ def get_status_text():
                 reason += f" — {oom}"
             status += f" {reason}"
 
-        # Add container line to message
         lines.append(f"{emoji} `{container.name}` — {status}")
-
-    # Return full message as a single string
     return "\n".join(lines)
 
-# Triggered when the bot successfully connects to Discord
+@client.event
 async def on_ready():
     logging.info(f"Logged in as {client.user}")
-
-    # Get the target channel
     channel = client.get_channel(CHANNEL_ID)
 
     # Look for pinned messages that start with this server's name
@@ -64,18 +52,14 @@ async def on_ready():
 
     last_status = None
 
-    # Main loop: check container status every 10 seconds
     while True:
         new_status = get_status_text()
 
-        # If status has changed, update the pinned message
         if new_status != last_status:
             logging.info("Container status changed — updating message")
             if pinned_message:
-                # Edit existing pinned message
                 await pinned_message.edit(content=new_status)
             else:
-                # Send and pin a new message
                 pinned_message = await channel.send(new_status)
                 await pinned_message.pin()
                 logging.info("Created and pinned new message")
@@ -85,5 +69,4 @@ async def on_ready():
 
         await asyncio.sleep(10)  # Check every 10 seconds
 
-# Start the bot using the provided token
 client.run(TOKEN)
