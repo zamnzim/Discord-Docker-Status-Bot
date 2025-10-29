@@ -23,13 +23,15 @@ def get_status_embed():
         title=f"{server_name} Docker Container Status"
     )
 
-    # Column widths
     name_width = 26
     status_width = 10
-    details_offset = 8 
+    details_pad = 8
 
-    header = f"{'Name':<{name_width}} {'Status':>{status_width}} {'Details':>{details_offset}}"
-    lines = [header, "-" * (name_width + status_width + details_offset)]
+    header = f"{'Name':<{name_width}} {'Status':>{status_width}} {'Details':<{details_pad}}"
+    divider = "-" * len(header)
+
+    lines = [header, divider]
+    fields = []
 
     for container in docker_client.containers.list(all=True):
         name = container.name[:name_width - 2]
@@ -52,11 +54,18 @@ def get_status_embed():
         line = f"{emoji} {name:<{name_width - 2}} {status:>{status_width}} {details}"
         lines.append(line)
 
-    embed.add_field(
-        name="",
-        value="```" + "\n".join(lines) + "```",
-        inline=False
-    )
+        # If the current chunk is getting too long, flush it
+        if sum(len(l) + 1 for l in lines) > 900:
+            fields.append("\n".join(lines))
+            lines = [header, divider]
+
+    # Add any remaining lines
+    if len(lines) > 2:
+        fields.append("\n".join(lines))
+
+    # Add each chunk as a separate field
+    for chunk in fields:
+        embed.add_field(name="", value=f"```{chunk}```", inline=False)
 
     return embed
 
