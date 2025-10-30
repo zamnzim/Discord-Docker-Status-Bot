@@ -30,7 +30,7 @@ docker run -d \
 ```yaml
 services:
   discordbot-docker-status:
-    image: ghcr.io/zamnzim/discord-docker-status-bot:latest
+    image: ghcr.io/zamnzim/discordbot-docker-status:latest
     container_name: discordbot-docker-status
     restart: unless-stopped
     environment:
