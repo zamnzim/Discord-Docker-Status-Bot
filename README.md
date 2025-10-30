@@ -1,4 +1,4 @@
-# Discord-Docker-Status-Bot
+# DiscordBot-Docker-Status
 A lightweight Python based Discord bot that that runs in a docker container, monitors Docker containers, and posts their status to a pinned message in a specified Discord channel.
 
 Every 10 seconds, the bot checks the status of all containers. If any changes are detected, it updates the pinned message with the current status.
@@ -18,20 +18,20 @@ This bot is designed for multi-server deployments. Each instance identifies its 
 # Docker Run
 ```
 docker run -d \
-  --name discord-docker-status-bot \
+  --name discordbot-docker-status \
   --restart unless-stopped \
   -e DISCORD_TOKEN=your_discord_bot_token_here \
   -e DISCORD_CHANNEL_ID=your_channel_id_here \
   -e DOCKER_SERVER_NAME=your_server_name_here \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  ghcr.io/zamnzim/discord-docker-status-bot:latest
+  ghcr.io/zamnzim/discordbot-docker-status:latest
 ```
 # Docker Compose
 ```yaml
 services:
-  discord-docker-status-bot:
+  discordbot-docker-status:
     image: ghcr.io/zamnzim/discord-docker-status-bot:latest
-    container_name: discord-docker-status-bot
+    container_name: discordbot-docker-status
     restart: unless-stopped
     environment:
       - DISCORD_TOKEN=your_discord_bot_token_here
