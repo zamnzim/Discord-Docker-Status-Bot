@@ -1,7 +1,7 @@
 services:
   discord-docker-status-bot:
-    image: ghcr.io/zamnzim/discord-docker-status-bot:latest
-    container_name: discord-docker-status-bot
+    image: ghcr.io/zamnzim/discordbot-docker-status:latest
+    container_name: discordbot-docker-status
     restart: unless-stopped
     environment:
       - DISCORD_TOKEN=your_discord_bot_token_here
